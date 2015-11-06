@@ -1,0 +1,23 @@
+{
+  "name": "jpm-reports",
+  "version": "1.0.0",
+  "description": "test reporter for mozilla's jpm addon test runner",
+  "main": "./bin/jpm-report",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/drazisil/jpm-reports.git"
+  },
+  "keywords": [
+    "jpm",
+    "testing"
+  ],
+  "author": "Joseph W Becher <jwbecher@drazisil.com> (drazisil)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/drazisil/jpm-reports/issues"
+  },
+  "homepage": "https://github.com/drazisil/jpm-reports#readme"
+}

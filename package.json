@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/drazisil/jpm-reports/issues"
   },
-  "homepage": "https://github.com/drazisil/jpm-reports#readme"
+  "homepage": "https://github.com/drazisil/jpm-reports#readme",
+  "dependencies": {
+    "commander": "^2.9.0"
+  }
 }

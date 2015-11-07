@@ -12,6 +12,8 @@ general:
 dependencies:
   override:
     - npm install
+  post:
+    - sudo npm install -g gulp
     
 test:
   post:

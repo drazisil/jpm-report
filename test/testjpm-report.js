@@ -3,12 +3,22 @@
 /* global describe it */
 var assert = require('assert')
 var jpm_report = require('../src/index.js')
+var VERSION = require('../package.json').version
 
 describe('Checking args', function () {
   it('with no args', function cb_parse_args_zero (done) {
     jpm_report.checkArgs(['node', 'jpm_report'], function cb_parse_args (err, res) {
       if (err) {
         assert.equal('Please use --version', err)
+        done()
+      }
+    })
+  })
+
+  it('with one arg - version', function cb_parse_args_version (done) {
+    jpm_report.checkArgs(['node', 'jpm_report', '--version'], function cb_parse_args (err, res) {
+      if (err) {
+        assert.equal(VERSION, err)
         done()
       }
     })

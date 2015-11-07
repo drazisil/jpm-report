@@ -1,10 +1,11 @@
 #!/usr/bin/env node
 
-var VERSION = require('../package.json').version
+var jpm_report = require('../src/index.js')
 
-console.log(VERSION)
-
-// print process.argv
-process.argv.forEach(function (val, index, array) {
-  console.log(index + ': ' + val)
+jpm_report.checkArgs(process.argv, function cb_parse_args (err, res) {
+  if (err) {
+    console.log(err)
+  } else {
+    console.log(res)
+  }
 })

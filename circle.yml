@@ -15,8 +15,8 @@ dependencies:
     
 test:
   override:
-    - "npm test"
-    - "npm coveralls"
+    - "npm run test"
+    - "npm run coveralls"
   post:
     - "bin/jpm-report --version"
     - "bin/jpm-report test.txt"

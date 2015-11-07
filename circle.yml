@@ -1,0 +1,14 @@
+machine:
+  node:
+    version: v0.11.40
+  environment:
+    COVERALLS_REPO_TOKEN: "8HyRfjr1bW9lZjJOQ7WE3RaGf9y4Gmlz4"
+    CIRCLE_ARTIFACTS: "~/jpm-report/coverage"
+
+general:
+  artifacts:
+    - "coverage" # relative to the user's home directory
+
+dependencies:
+  override:
+    - npm install

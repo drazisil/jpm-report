@@ -4,7 +4,8 @@
   "description": "test reporter for mozilla's jpm addon test runner",
   "main": "./bin/jpm-report",
   "scripts": {
-    "test": "gulp dev"
+    "test": "gulp test",
+    "coveralls": "gulp coveralls"
   },
   "repository": {
     "type": "git",

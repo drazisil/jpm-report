@@ -12,3 +12,8 @@ general:
 dependencies:
   override:
     - npm install
+    
+test:
+  post:
+    - "bin/jpm-report --version"
+    - "bin/jpm-report test.txt"

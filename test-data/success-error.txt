@@ -1,0 +1,25 @@
+JPM [info] Starting jpm test on Parent Folder
+Creating XPI
+JPM [info] XPI created at /tmp/{bf1cbc88-d410-4768-9f6a-193200bab71f}-4.6.0.xpi (149ms)
+Created XPI at /tmp/{bf1cbc88-d410-4768-9f6a-193200bab71f}-4.6.0.xpi
+JPM [info] Creating a new profile
+Running tests on Firefox 45.0a1/Gecko 45.0a1 (Build 20151106030423) ({ec8030f7-c20a-464f-9b0e-13a3a9e97384}) under linux/x86_64.
+...console.log: parentfolder: [JavaScript Warning: "TypeError: useless expression" {file: "resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/commonjs/sdk/util/sequence.js" line: 333}]
+............console.warn: parentfolder: 2 warnings or errors were logged to the platform's nsIConsoleService, which could be of no consequence; however, they could also be indicative of aberrant behavior.
+
+15 of 15 tests passed.
+All tests passed!
+console.error:
+JPM [error]   Message: Error: Connection closed before committing the transaction.
+  Stack:
+    ConnectionData.prototype<.executeTransaction/promise</transactionPromise<@resource://gre/modules/Sqlite.jsm:624:1
+TaskImpl_run@resource://gre/modules/Task.jsm:314:40
+Handler.prototype.process@resource://gre/modules/Promise.jsm -> resource://gre/modules/Promise-backend.js:934:23
+this.PromiseWalker.walkerLoop@resource://gre/modules/Promise.jsm -> resource://gre/modules/Promise-backend.js:813:7
+Promise*this.PromiseWalker.scheduleWalkerLoop@resource://gre/modules/Promise.jsm -> resource://gre/modules/Promise-backend.js:744:11
+this.PromiseWalker.schedulePromise@resource://gre/modules/Promise.jsm -> resource://gre/modules/Promise-backend.js:776:7
+this.PromiseWalker.completePromise@resource://gre/modules/Promise.jsm -> resource://gre/modules/Promise-backend.js:711:7
+TaskImpl_run@resource://gre/modules/Task.jsm:319:13
+Spinner.prototype.observe@resource://gre/modules/AsyncShutdown.jsm:523:9
+nsAsyncShutdownBarrier.prototype.wait/<@resource://gre/components/nsAsyncShutdown.js:215:7
+Spinner.prototype.observe@resource://gre/modules/AsyncShutdown.jsm:523:9 

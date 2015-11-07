@@ -1,0 +1,13 @@
+JPM [info] Starting jpm test on Parent Folder
+Creating XPI
+JPM [info] XPI created at /tmp/{bf1cbc88-d410-4768-9f6a-193200bab71f}-4.5.6.xpi (5556ms)
+Created XPI at /tmp/{bf1cbc88-d410-4768-9f6a-193200bab71f}-4.5.6.xpi
+JPM [info] Creating a new profile
+Running tests on Firefox 38.0.5/Gecko 38.0.5 ({ec8030f7-c20a-464f-9b0e-13a3a9e97384}) under linux/x86.
+console.warn: parentfolder: Plural form unknown for locale "null"
+.....console.error: parentfolder:
+  warnings and/or errors were logged.
+
+5 of 6 tests passed.
+
+There were test failures...

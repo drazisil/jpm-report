@@ -54,3 +54,15 @@ describe('Checking args', function () {
     })
   })
 })
+
+describe('testing reprt processing', function () {
+  it('test error')
+
+  it('test no error, hangs')
+
+  it('test failure')
+
+  it('test success')
+
+  it('test success with errors after')
+})

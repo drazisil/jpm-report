@@ -1,0 +1,5 @@
+JPM [info] Starting jpm test on Parent Folder
+Creating XPI
+JPM [info] XPI created at /tmp/{bf1cbc88-d410-4768-9f6a-193200bab71f}-4.6.0.xpi (2771ms)
+Created XPI at /tmp/{bf1cbc88-d410-4768-9f6a-193200bab71f}-4.6.0.xpi
+JPM [info] Creating a new profile 

@@ -1,0 +1,8 @@
+JPM [info] Starting jpm test on Parent Folder
+Creating XPI
+JPM [info] XPI created at /tmp/{bf1cbc88-d410-4768-9f6a-193200bab71f}-4.6.0.xpi (3342ms)
+Created XPI at /tmp/{bf1cbc88-d410-4768-9f6a-193200bab71f}-4.6.0.xpi
+JPM [info] Creating a new profile
+JPM [error] No Firefox binary found at null
+JPM [error] Specify a Firefox binary to use with the `-b` flag.
+JPM [error] Error: spawn ENOENT 

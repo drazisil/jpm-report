@@ -2,3 +2,9 @@
 
 var VERSION = require('../package.json').version
 
+console.log(VERSION)
+
+// print process.argv
+process.argv.forEach(function(val, index, array) {
+  console.log(index + ': ' + val)
+})

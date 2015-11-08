@@ -12,7 +12,7 @@ general:
 dependencies:
   override:
     - npm install
-    
+
 test:
   override:
     - "npm run test"
@@ -20,3 +20,5 @@ test:
   post:
     - "bin/jpm-report --version"
     - "bin/jpm-report test.txt"
+    - "bin/jpm-report test-data/success.txt"
+    - "bin/jpm-report test-data/failure.txt"

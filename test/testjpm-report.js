@@ -34,12 +34,13 @@ describe('Checking args', function () {
   })
 
   it('with one arg - a file', function cb_parse_args_one (done) {
-    jpm_report.checkArgs(['node', 'jpm_report', 'bin/jpm-report'], function cb_parse_args (err, res) {
+    jpm_report.checkArgs(['node', 'jpm_report', 'test-data/success.txt'], function cb_parse_args (err, res) {
       if (err) {
         assert.fail('should not have an error')
         done()
       } else {
-        assert.equal("I'm a file", res)
+        res = JSON.parse(res)
+        assert.equal(res.success.total_success, res.success.total_tests)
         done()
       }
     })
@@ -55,14 +56,77 @@ describe('Checking args', function () {
   })
 })
 
-describe('testing reprt processing', function () {
-  it('test error')
+describe('testing report processing', function () {
+  it('invalid file', function (done) {
+    jpm_report.parseReport('test-data/FHFFY^fdhwhd', function cb_parse_report (err, res) {
+      if (err) {
+        assert.equal("Error: ENOENT, open 'test-data/FHFFY^fdhwhd'", err)
+        done()
+      } else {
+        assert.fail('should have an error')
+      }
+    })
+  })
 
-  it('test no error, hangs')
+  it('test error', function (done) {
+    jpm_report.parseReport('test-data/error.txt', function cb_parse_report (err, res) {
+      if (err) {
+        assert.equal('ERROR: unable to locate result line', err)
+        done()
+      } else {
+        assert.fail('should have an error')
+      }
+    })
+  })
 
-  it('test failure')
+  it('test no error, hangs', function (done) {
+    jpm_report.parseReport('test-data/error-no-error.txt', function cb_parse_report (err, res) {
+      if (err) {
+        assert.equal('ERROR: unable to locate result line', err)
+        done()
+      } else {
+        assert.fail('should have an error')
+        done()
+      }
+    })
+  })
 
-  it('test success')
+  it('test failure', function (done) {
+    jpm_report.parseReport('test-data/failure.txt', function cb_parse_report (err, res) {
+      if (err) {
+        assert.fail('should not have an error')
+        done()
+      } else {
+        res = JSON.parse(res)
+        assert.notEqual(res.success.total_success, res.success.total_tests)
+        done()
+      }
+    })
+  })
 
-  it('test success with errors after')
+  it('test success', function (done) {
+    jpm_report.parseReport('test-data/success.txt', function cb_parse_report (err, res) {
+      if (err) {
+        assert.fail('should not have an error')
+        done()
+      } else {
+        res = JSON.parse(res)
+        assert.equal(res.success.total_success, res.success.total_tests)
+        done()
+      }
+    })
+  })
+
+  it('test success with errors after', function (done) {
+    jpm_report.parseReport('test-data/success-error.txt', function cb_parse_report (err, res) {
+      if (err) {
+        assert.equal('should not have an error', err)
+        done()
+      } else {
+        res = JSON.parse(res)
+        assert.equal(res.success.total_success, res.success.total_tests)
+        done()
+      }
+    })
+  })
 })

@@ -6,6 +6,7 @@ jpm_report.checkArgs(process.argv, function cb_parse_args (err, res) {
   if (err) {
     console.log(err)
   } else {
-    console.log(res)
+    res = JSON.parse(res)
+    console.log(res.success.total_success + ' of ' + res.success.total_tests + ' passed')
   }
 })

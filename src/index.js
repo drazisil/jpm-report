@@ -30,7 +30,28 @@ function parseArg (arg, cb) {
 }
 
 function parseReport (path, cb) {
-  cb(null, "I'm a file")
+  fs.readFile(path, 'utf8', function cb_read_file (err, data) {
+    if (err) {
+      cb(err)
+      return
+    }
+    // Look for a success line
+    var re = /^([\d]+) of ([\d]+) tests passed/im
+    var found = data.match(re)
+    if (found) {
+      var res = JSON.stringify(
+        {'success': {
+          'contents': data,
+          'total_tests': found[2],
+          'total_success': found[1]}
+        }
+      )
+      cb(null, res)
+    } else {
+      // No match, clearly an error
+      cb('ERROR: unable to locate result line')
+    }
+  })
 }
 
 function showHelp (cb) {

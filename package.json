@@ -2,7 +2,8 @@
   "name": "jpm-report",
   "version": "1.0.0",
   "description": "test reporter for mozilla's jpm addon test runner",
-  "main": "./bin/jpm-report",
+  "main": "./src/index.js"
+  "bin": "./bin/jpm-report",
   "scripts": {
     "test": "gulp test",
     "coveralls": "gulp coveralls"

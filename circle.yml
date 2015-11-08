@@ -7,16 +7,13 @@ machine:
 
 general:
   artifacts:
-    - "coverage" # relative to the user's home directory
+    - "coverage"
 
 dependencies:
   override:
     - npm install
-    
+
 test:
   override:
     - "npm run test"
     - "npm run coveralls"
-  post:
-    - "bin/jpm-report --version"
-    - "bin/jpm-report test.txt"

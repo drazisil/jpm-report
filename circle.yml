@@ -7,7 +7,7 @@ machine:
 
 general:
   artifacts:
-    - "coverage" # relative to the user's home directory
+    - "coverage"
 
 dependencies:
   override:

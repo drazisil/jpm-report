@@ -22,9 +22,6 @@
     "url": "https://github.com/drazisil/jpm-report/issues"
   },
   "homepage": "https://github.com/drazisil/jpm-report#readme",
-  "dependencies": {
-    "commander": "^2.9.0"
-  },
   "devDependencies": {
     "coveralls": "^2.11.4",
     "gulp": "^3.9.0",

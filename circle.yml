@@ -17,8 +17,3 @@ test:
   override:
     - "npm run test"
     - "npm run coveralls"
-  post:
-    - "bin/jpm-report --version"
-    - "bin/jpm-report test.txt"
-    - "bin/jpm-report test-data/success.txt"
-    - "bin/jpm-report test-data/failure.txt"

@@ -17,5 +17,5 @@ test:
   override:
     - "npm run test"
     - "npm run coveralls"
-    - mkdir $CIRCLE_TEST_RESULTS/junit
-    - "bin/jpm-report test-data/success.txt > $CIRCLE_TEST_RESULTS/junit/results.xml"
+    - mkdir $CIRCLE_TEST_REPORTS/junit
+    - "bin/jpm-report test-data/success.txt > $CIRCLE_TEST_REPORTS/junit/results.xml"

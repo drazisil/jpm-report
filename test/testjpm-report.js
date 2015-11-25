@@ -56,9 +56,9 @@ describe('Checking args', function () {
   })
 })
 
-describe('testing report processing', function () {
+describe('testing report processing, output: json', function () {
   it('invalid file', function (done) {
-    jpm_report.parseReport('test-data/FHFFY^fdhwhd', function cb_parse_report (err, res) {
+    jpm_report.parseReport('test-data/FHFFY^fdhwhd', 'json', function cb_parse_report (err, res) {
       if (err) {
         assert.equal("Error: ENOENT, open 'test-data/FHFFY^fdhwhd'", err)
         done()
@@ -69,7 +69,7 @@ describe('testing report processing', function () {
   })
 
   it('test error', function (done) {
-    jpm_report.parseReport('test-data/error.txt', function cb_parse_report (err, res) {
+    jpm_report.parseReport('test-data/error.txt', 'json', function cb_parse_report (err, res) {
       if (err) {
         assert.equal('ERROR: unable to locate result line', err)
         done()
@@ -80,7 +80,7 @@ describe('testing report processing', function () {
   })
 
   it('test no error, hangs', function (done) {
-    jpm_report.parseReport('test-data/error-no-error.txt', function cb_parse_report (err, res) {
+    jpm_report.parseReport('test-data/error-no-error.txt', 'json', function cb_parse_report (err, res) {
       if (err) {
         assert.equal('ERROR: unable to locate result line', err)
         done()
@@ -92,7 +92,7 @@ describe('testing report processing', function () {
   })
 
   it('test failure', function (done) {
-    jpm_report.parseReport('test-data/failure.txt', function cb_parse_report (err, res) {
+    jpm_report.parseReport('test-data/failure.txt', 'json', function cb_parse_report (err, res) {
       if (err) {
         assert.fail('should not have an error')
         done()
@@ -105,7 +105,7 @@ describe('testing report processing', function () {
   })
 
   it('test success', function (done) {
-    jpm_report.parseReport('test-data/success.txt', function cb_parse_report (err, res) {
+    jpm_report.parseReport('test-data/success.txt', 'json', function cb_parse_report (err, res) {
       if (err) {
         assert.fail('should not have an error')
         done()
@@ -118,7 +118,7 @@ describe('testing report processing', function () {
   })
 
   it('test success with errors after', function (done) {
-    jpm_report.parseReport('test-data/success-error.txt', function cb_parse_report (err, res) {
+    jpm_report.parseReport('test-data/success-error.txt', 'json', function cb_parse_report (err, res) {
       if (err) {
         assert.equal('should not have an error', err)
         done()

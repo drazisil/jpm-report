@@ -23,13 +23,13 @@ function parseArg (arg, cb) {
       if (err || !stats.isFile()) {
         cb('ERROR: ' + arg + ' is not a file.')
       } else {
-        parseReport(arg, cb)
+        parseReport(arg, 'json', cb)
       }
     })
   }
 }
 
-function parseReport (path, cb) {
+function parseReport (path, format, cb) {
   fs.readFile(path, 'utf8', function cb_read_file (err, data) {
     if (err) {
       cb(err)
@@ -39,14 +39,18 @@ function parseReport (path, cb) {
     var re = /^([\d]+) of ([\d]+) tests passed/im
     var found = data.match(re)
     if (found) {
-      var res = JSON.stringify(
-        {'success': {
-          'contents': data,
-          'total_tests': found[2],
-          'total_success': found[1]}
-        }
-      )
-      cb(null, res)
+      if (format === 'json') {
+        var res = JSON.stringify(
+          {'success': {
+            'contents': data,
+            'total_tests': found[2],
+            'total_success': found[1]}
+          }
+        )
+        cb(null, res)
+      } else {
+        cb('ERROR: output format not supported, please see help')
+      }
     } else {
       // No match, clearly an error
       cb('ERROR: unable to locate result line')

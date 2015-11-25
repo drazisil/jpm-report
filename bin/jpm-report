@@ -9,6 +9,8 @@ jpm_report.checkArgs(process.argv, function cb_parse_args (err, res) {
   } else {
     res = JSON.parse(res)
     if (res.success.total_success === res.success.total_tests) {
+      process.stdout.write('<testsuite tests="' + res.success.total_tests + '">')
+      process.stdout.write('</testsuite>')
       process.stdout.write(res.success.total_success + ' of ' + res.success.total_tests + ' passed')
       process.exit()
     } else {

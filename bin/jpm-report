@@ -10,6 +10,7 @@ jpm_report.checkArgs(process.argv, function cb_parse_args (err, res) {
     res = JSON.parse(res)
     if (res.success.total_success === res.success.total_tests) {
       process.stdout.write('<testsuite errors="0" failures="0" name="" tests="' + res.success.total_tests + '" time="223">')
+      process.stdout.write('<testcase classname="main"></testcase>')
       process.stdout.write('</testsuite>')
       process.exit()
     } else {

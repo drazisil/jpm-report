@@ -17,3 +17,4 @@ test:
   override:
     - "npm run test"
     - "npm run coveralls"
+    - "bin/jpm-report test-data/success.txt > $CIRCLE_TEST_RESULTS"

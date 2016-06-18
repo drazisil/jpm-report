@@ -5,7 +5,7 @@ var VERSION = require('../package.json').version
 
 function checkArgs (args, cb) {
   var argCount = args.length
-  if (argCount < 4) {
+  if (argCount < 3) {
     showHelp(cb)
   } else if (argCount === 3 || argCount === 4) {
     parseArg(args[2], cb)
@@ -97,7 +97,7 @@ function outputJUnit2File (input, filename) {
 }
 
 function showHelp (cb) {
-  strHelp = 'jpm-report <input file> (output file)'
+  var strHelp = 'jpm-report <input file> (output file)'
   cb(strHelp)
 }
 

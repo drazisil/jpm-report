@@ -16,6 +16,6 @@ dependencies:
 
 test:
   override:
-    - "gulp dev"
+    - "npm run test"
     - mkdir $CIRCLE_TEST_REPORTS/junit
     - "bin/jpm-report test-data/success.txt > $CIRCLE_TEST_REPORTS/junit/results.xml"

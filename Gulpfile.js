@@ -36,7 +36,7 @@ gulp.task('coveralls', function (cb) {
   .pipe(coveralls())
 })
 
-gulp.task('validateXML', function (cb) {
+gulp.task('validateXML', ['test'], function (cb) {
   xsd.parseFile('./test-data/JUnit.xsd', function(err, schema){
     schema.validateFile('./test-data/success.xml', function(err, validationErrors){
       // err contains any technical error 

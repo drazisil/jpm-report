@@ -4,6 +4,7 @@ var fs = require('fs')
 var VERSION = require('../package.json').version
 
 function checkArgs (args, cb) {
+  console.dir(args)
   var argCount = args.length
   if (argCount < 3) {
     showHelp(cb)

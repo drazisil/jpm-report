@@ -1,12 +1,12 @@
 #!/usr/bin/env node
 
-var jpm_report = require('../src/index.js')
+var jpmReport = require('../src/index.js')
 
-jpm_report.checkArgs(process.argv, function cb_parse_args (err, res) {
+jpmReport.checkArgs(process.argv, function cbParseArgs (err, res) {
   if (err) {
     console.log(err)
     process.exit(1)
   } else {
-    jpm_report.outputJUnit(res)
+    jpmReport.outputJUnit(res)
   }
 })

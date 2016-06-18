@@ -5,7 +5,7 @@
   "main": "./src/index.js",
   "bin": "./bin/jpm-report",
   "scripts": {
-    "test": "gulp dev",
+    "test": "gulp dev"
   },
   "repository": {
     "type": "git",

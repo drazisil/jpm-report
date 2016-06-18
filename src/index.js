@@ -5,13 +5,12 @@ var VERSION = require('../package.json').version
 
 function checkArgs (args, cb) {
   var argCount = args.length
-  if (argCount < 3) {
+  if (argCount < 4) {
     showHelp(cb)
-  } else if (argCount === 3) {
+  } else if (argCount === 3 || argCount === 4) {
     parseArg(args[2], cb)
-  } else if (argCount > 3) {
-    cb('ERROR: too many arguments, please use --help')
-  }
+  } else if (argCount > 4) {
+    showHelp(cb)  }
 }
 
 function parseArg (arg, cb) {
@@ -30,6 +29,12 @@ function parseArg (arg, cb) {
 }
 
 function parseReport (path, format, cb) {
+  // Check if a file
+  fs.stat(arg, function cb_stat (err, stats) {
+    if (err || !stats.isFile()) {
+      cb('ERROR: ' + arg + ' is not a file.')
+    }
+  })
   fs.readFile(path, 'utf8', function cb_read_file (err, data) {
     if (err) {
       cb(err)
@@ -92,10 +97,15 @@ function outputJUnit2File (input, filename) {
 }
 
 function showHelp (cb) {
-  cb('Please use --version')
+  strHelp = 'jpm-report <input file> (output file)'
+  cb(strHelp)
 }
 
-module.exports.checkArgs = checkArgs
-module.exports.parseArg = parseArg
-module.exports.parseReport = parseReport
-module.exports.showHelp = showHelp
+module.exports = {
+  checkArgs: checkArgs,
+  parseArg: parseArg,
+  parseReport: parseReport,
+  showHelp: showHelp,
+  outputJUnit: outputJUnit,
+  outputJUnit2File: outputJUnit2File
+}

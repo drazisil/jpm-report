@@ -16,6 +16,6 @@ dependencies:
 
 test:
   override:
-    - "npm run dev"
+    - "grunt dev"
     - mkdir $CIRCLE_TEST_REPORTS/junit
     - "bin/jpm-report test-data/success.txt > $CIRCLE_TEST_REPORTS/junit/results.xml"

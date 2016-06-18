@@ -58,6 +58,21 @@ function parseReport (path, format, cb) {
   })
 }
 
+function outputJUnit (input) {
+    res = JSON.parse(input)
+    if (res.success.total_success === res.success.total_tests) {
+      var strOutput = ''
+      strOutput += '<testsuite errors="0" failures="0" name="" tests="' + res.success.total_tests + '" time="223">'
+      strOutput += '<testcase classname="main"></testcase>'
+      strOutput += '</testsuite>'
+      process.stdout.write(strOutput)
+      process.exit()
+    } else {
+      process.stdout.write(res.success.total_success + ' of ' + res.success.total_tests + ' passed')
+      process.exit(1)
+    }
+}
+
 function showHelp (cb) {
   cb('Please use --version')
 }

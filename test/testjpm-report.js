@@ -60,7 +60,7 @@ describe('testing report processing, output: foo', function () {
   it('test success', function (done) {
     jpm_report.parseReport('test-data/success.txt', 'foo', function cb_parse_report (err, res) {
       if (err) {
-        assert.equal('ERROR: output format not supported, please see hel', err)
+        assert.equal('ERROR: output format not supported, please see help', err)
         done()
       } else {
         assert.fail('should have an error')

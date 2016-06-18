@@ -2,6 +2,7 @@
 
 /* global describe it */
 var assert = require('assert')
+var fs = require('fs')
 var jpm_report = require('../src/index.js')
 var VERSION = require('../package.json').version
 
@@ -139,6 +140,35 @@ describe('testing report processing, output: json', function () {
         res = JSON.parse(res)
         assert.equal(res.success.total_success, res.success.total_tests)
         done()
+      }
+    })
+  })
+})
+
+describe('testing junit output: success', function () {
+  it('test success', function (done) {
+    jpm_report.parseReport('test-data/success.txt', 'json', function cb_parse_report (err, res) {
+      if (err) {
+        assert.fail('should not have an error')
+        done()
+      } else {
+        res = JSON.parse(res)
+        fs.writeFileSync(res, 'test-data/success.json')
+        jpm_report.outputJUnit2File('test-data/success.json', 'test-data/success.xml')
+        assert.ok('success')
+      }
+    })
+  })
+
+    it('test fail', function (done) {
+    jpm_report.parseReport('test-data/error.txt', 'json', function cb_parse_report (err, res) {
+      if (err) {
+        assert.fail('should not have an error')
+        done()
+      } else {
+        fs.writeFileSync(res, 'test-data/error.json')
+        jpm_report.outputJUnit2File('test-data/error.json', 'test-data/error.xml')
+        assert.ok('success')
       }
     })
   })

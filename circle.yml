@@ -8,6 +8,7 @@ machine:
 general:
   artifacts:
     - "coverage"
+    - "test-data"
 
 dependencies:
   override:
@@ -15,7 +16,6 @@ dependencies:
 
 test:
   override:
-    - "npm run test"
-    - "npm run coveralls"
+    - "npm run dev"
     - mkdir $CIRCLE_TEST_REPORTS/junit
     - "bin/jpm-report test-data/success.txt > $CIRCLE_TEST_REPORTS/junit/results.xml"

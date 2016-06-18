@@ -73,6 +73,24 @@ function outputJUnit (input) {
     }
 }
 
+function outputJUnit2File (input, filename) {
+    res = JSON.parse(input)
+    var strOutput = ''
+    if (res.success.total_success === res.success.total_tests) {
+      strOutput += '<testsuite errors="0" failures="0" name="" tests="' + res.success.total_tests + '" time="223">'
+      strOutput += '<testcase classname="main"></testcase>'
+      strOutput += '</testsuite>'
+      fs.writeFileSync(strOutput, filename)
+      process.stdout.write(strOutput)
+      process.exit()
+    } else {
+      strOutput += res.success.total_success + ' of ' + res.success.total_tests + ' passed'
+      fs.writeFileSync(strOutput, filename)
+      process.stdout.write(strOutput)
+      process.exit(1)
+    }
+}
+
 function showHelp (cb) {
   cb('Please use --version')
 }

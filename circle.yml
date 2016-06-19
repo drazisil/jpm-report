@@ -1,5 +1,5 @@
 machine:
-  node
+#  node
 #    version: v0.10.33
   environment:
     COVERALLS_REPO_TOKEN: "8HyRfjr1bW9lZjJOQ7WE3RaGf9y4Gmlz4"

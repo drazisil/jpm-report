@@ -85,9 +85,9 @@ function outputJUnit (input, cb) {
 }
 
 function outputJUnit2File (input, filename, cb) {
+  var res = JSON.parse(input)
   var total_failures = res.success.total_tests = res.success.total_success
   var strOutput = ''
-  var res = JSON.parse(input)
   if (res.success.total_success === res.success.total_tests) {
     strOutput += '<testsuite errors="0" failures="' + total_failures + '" name="" tests="' + res.success.total_tests + '" time="223">'
     strOutput += '<testcase classname="main"></testcase>'

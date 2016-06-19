@@ -21,55 +21,53 @@ function parseArg (args, cb) {
     cb(VERSION)
   } else {
     // Check if a file
-    fs.stat(args[0], cb, function cb_stat (err, stats, cb) {
-      if (err || !stats.isFile()) {
-        cb('ERROR: ' + args[0] + ' is not a file.')
-      } else {
-        parseReport(args, cb)
-      }
-    })
+    var stats = fs.statSync(args[0])
+    if (err || !stats.isFile()) {
+      cb('ERROR: ' + args[0] + ' is not a file.')
+    } else {
+      parseReport(args, cb)
+    }
   }
 }
 
 function parseReport (args, cb) {
   // Check if a file
   var path = args[0]
-  fs.stat(path, function cb_stat (err, stats) {
-    if (err || !stats.isFile()) {
-      cb('ERROR: ' + path + ' is not a file.')
-    }
-    fs.readFile(path, 'utf8', function cb_read_file (err, data) {
-      if (err) {
-        cb(err)
-      }
-      // Look for a success line
-      var re = /^([\d]+) of ([\d]+) tests passed/im
-      var found = data.match(re)
-      if (found) {
-        var res = JSON.stringify(
-          {'success': {
-            // 'contents': data,
-            'total_tests': found[2],
-            'total_success': found[1]}
-          }
-        )
-        if (args.length === 2) {
-          outputJUnit2File (res, args[1], function (exitCode){
-            cb(null, exitCode)
-          })
-        } else {
-          outputJUnit (res, function (err, res){
-            if (err) {
-              cb(err)
-            }
-            cb(null, res)
-          })
+  fs.statSync(path)
+  if (!stats.isFile()) {
+    cb('ERROR: ' + path + ' is not a file.')
+  }
+  fs.readFileSync(path, 'utf8')
+  if (err) {
+    cb(err)
+  }
+  // Look for a success line
+    var re = /^([\d]+) of ([\d]+) tests passed/im
+    var found = data.match(re)
+    if (found) {
+      var res = JSON.stringify(
+        {'success': {
+          // 'contents': data,
+          'total_tests': found[2],
+          'total_success': found[1]}
         }
+      )
+      if (args.length === 2) {
+        outputJUnit2File (res, args[1], function (exitCode){
+          cb(null, exitCode)
+        })
       } else {
-        // No match, clearly an error
-        cb('ERROR: unable to locate result line')
+        outputJUnit (res, function (err, res){
+          if (err) {
+            cb(err)
+          }
+          cb(null, res)
+        })
       }
-    })
+    } else {
+      // No match, clearly an error
+      cb('ERROR: unable to locate result line')
+    }
   })
 }
 

@@ -22,13 +22,20 @@ function parseArg (args, cb) {
   } else {
     // Check if a file
     try {
-      var stats = fs.statSync(args[0])
+      if (typeof args === Array) {
+        var stats = fs.statSync(args[0])
+      } else {
+        var stats = fs.statSync(args)
+      }
     } catch (err) {
       if (err.code === 'ENOENT') {
-        cb('ERROR: ' + args[0] + ' is not a file.')
+        if (typeof args === Array) {
+          cb('ERROR: ' + args[0] + ' is not a file.')
+        } else {
+          cb('ERROR: ' + args + ' is not a file.')
+        }
       }
-      console.dir(err)
-      cb(err.message)
+      cb(err)
     }
     parseReport(args, cb)
   }
@@ -36,15 +43,18 @@ function parseArg (args, cb) {
 
 function parseReport (args, cb) {
   // Check if a file
-  var path = args[0]
+  if (typeof args === Array) {
+    var path = args[0]
+  } else {
+    var path = args
+  }
   try {
     fs.statSync(path)
   } catch (err) {
     if (err.code === 'ENOENT') {
-      cb('ERROR: ' + args[0] + ' is not a file.')
+      cb('ERROR: ' + path + ' is not a file.')
     }
-    console.dir(err)
-    cb(err.message)
+    cb(err)
   }
   try {
     var data = fs.readFileSync(path, 'utf8')

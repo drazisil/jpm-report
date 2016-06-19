@@ -42,33 +42,32 @@ function parseReport (args, cb) {
     cb(err)
   }
   // Look for a success line
-    var re = /^([\d]+) of ([\d]+) tests passed/im
-    var found = data.match(re)
-    if (found) {
-      var res = JSON.stringify(
-        {'success': {
-          // 'contents': data,
-          'total_tests': found[2],
-          'total_success': found[1]}
-        }
-      )
-      if (args.length === 2) {
-        outputJUnit2File (res, args[1], function (exitCode){
-          cb(null, exitCode)
-        })
-      } else {
-        outputJUnit (res, function (err, res){
-          if (err) {
-            cb(err)
-          }
-          cb(null, res)
-        })
+  var re = /^([\d]+) of ([\d]+) tests passed/im
+  var found = data.match(re)
+  if (found) {
+    var res = JSON.stringify(
+      {'success': {
+        // 'contents': data,
+        'total_tests': found[2],
+        'total_success': found[1]}
       }
+    )
+    if (args.length === 2) {
+      outputJUnit2File (res, args[1], function (exitCode){
+        cb(null, exitCode)
+      })
     } else {
-      // No match, clearly an error
-      cb('ERROR: unable to locate result line')
+      outputJUnit (res, function (err, res){
+        if (err) {
+          cb(err)
+        }
+        cb(null, res)
+      })
     }
-  })
+  } else {
+    // No match, clearly an error
+    cb('ERROR: unable to locate result line')
+  }
 }
 
 function outputJUnit (input, cb) {

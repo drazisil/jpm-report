@@ -76,32 +76,33 @@ function parseReport (args, format, cb) {
 }
 
 function outputJUnit (input, cb) {
-    var res = JSON.parse(input)
-    var total_failures = res.success.total_tests = res.success.total_success
-    var strOutput = ''
-    strOutput += '<testsuite errors="' + total_failures + '" failures="0" name="" tests="' + res.success.total_tests + '" time="223">'
-    strOutput += '<testcase classname="main"></testcase>'
-    strOutput += '</testsuite>'
-    process.stdout.write(strOutput)
-    cb(0)
+  var res = JSON.parse(input)
+  var total_failures = res.success.total_tests = res.success.total_success
+  var strOutput = ''
+  strOutput += '<testsuite errors="0" failures="' + total_failures + '" name="" tests="' + res.success.total_tests + '" time="223">'
+  strOutput += '<testcase classname="main"></testcase>'
+  strOutput += '</testsuite>'
+  process.stdout.write(strOutput)
+  cb(0)
 }
 
 function outputJUnit2File (input, filename, cb) {
-    var res = JSON.parse(input)
-    var strOutput = ''
-    if (res.success.total_success === res.success.total_tests) {
-      strOutput += '<testsuite errors="0" failures="0" name="" tests="' + res.success.total_tests + '" time="223">'
-      strOutput += '<testcase classname="main"></testcase>'
-      strOutput += '</testsuite>'
-      fs.writeFileSync(filename, strOutput)
-      // process.stdout.write(strOutput)
-      cb(0)
-    } else {
-      strOutput += res.success.total_success + ' of ' + res.success.total_tests + ' passed'
-      fs.writeFileSync(filename, strOutput)
-      // process.stdout.write(strOutput)
-      cb(1)
-    }
+  var total_failures = res.success.total_tests = res.success.total_success
+  var strOutput = ''
+  var res = JSON.parse(input)
+  if (res.success.total_success === res.success.total_tests) {
+    strOutput += '<testsuite errors="0" failures="' + total_failures + '" name="" tests="' + res.success.total_tests + '" time="223">'
+    strOutput += '<testcase classname="main"></testcase>'
+    strOutput += '</testsuite>'
+    fs.writeFileSync(filename, strOutput)
+    // process.stdout.write(strOutput)
+    cb(0)
+  } else {
+    strOutput += res.success.total_success + ' of ' + res.success.total_tests + ' passed'
+    fs.writeFileSync(filename, strOutput)
+    // process.stdout.write(strOutput)
+    cb(1)
+  }
 }
 
 function showHelp (cb) {

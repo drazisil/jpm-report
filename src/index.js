@@ -25,29 +25,27 @@ function parseArg (args, cb) {
       if (err || !stats.isFile()) {
         cb('ERROR: ' + args[0] + ' is not a file.')
       } else {
-        parseReport(args, 'json', cb)
+        parseReport(args, cb)
       }
     })
   }
 }
 
-function parseReport (args, format, cb) {
+function parseReport (args, cb) {
   // Check if a file
   var path = args[0]
   fs.stat(path, function cb_stat (err, stats) {
     if (err || !stats.isFile()) {
       cb('ERROR: ' + path + ' is not a file.')
     }
-  })
-  fs.readFile(path, 'utf8', function cb_read_file (err, data) {
-    if (err) {
-      cb(err)
-    }
-    // Look for a success line
-    var re = /^([\d]+) of ([\d]+) tests passed/im
-    var found = data.match(re)
-    if (found) {
-      if (format === 'json') {
+    fs.readFile(path, 'utf8', function cb_read_file (err, data) {
+      if (err) {
+        cb(err)
+      }
+      // Look for a success line
+      var re = /^([\d]+) of ([\d]+) tests passed/im
+      var found = data.match(re)
+      if (found) {
         var res = JSON.stringify(
           {'success': {
             'contents': data,

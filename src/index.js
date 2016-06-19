@@ -27,6 +27,7 @@ function parseArg (args, cb) {
       if (err.code === 'ENOENT') {
         cb('ERROR: ' + args[0] + ' is not a file.')
       }
+      console.dir(err)
       cb(err)
     }
     parseReport(args, cb)
@@ -42,6 +43,7 @@ function parseReport (args, cb) {
     if (err.code === 'ENOENT') {
       cb('ERROR: ' + args[0] + ' is not a file.')
     }
+    console.dir(err)
     cb(err)
   }
   try {
@@ -65,7 +67,7 @@ function parseReport (args, cb) {
         cb(null, exitCode)
       })
     } else {
-      outputJUnit (res, function (err, res){
+      outputJUnit (res, function (err, res) {
         if (err) {
           cb(err)
         }
@@ -85,8 +87,7 @@ function outputJUnit (input, cb) {
   strOutput += '<testsuite errors="0" failures="' + total_failures + '" name="" tests="' + res.success.total_tests + '" time="223">'
   strOutput += '<testcase classname="main"></testcase>'
   strOutput += '</testsuite>'
-  process.stdout.write(strOutput)
-  cb(null, res)
+  cb(null, strOutput)
 }
 
 function outputJUnit2File (input, filename, cb) {
@@ -103,7 +104,6 @@ function outputJUnit2File (input, filename, cb) {
   } else {
     strOutput += res.success.total_success + ' of ' + res.success.total_tests + ' passed'
     fs.writeFileSync(filename, strOutput)
-    // process.stdout.write(strOutput)
     cb(null, 1)
   }
 }

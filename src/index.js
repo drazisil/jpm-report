@@ -10,7 +10,8 @@ function checkArgs (args, cb) {
   } else if (argCount === 3 || argCount === 4) {
     parseArg(args[2], cb)
   } else if (argCount > 4) {
-    showHelp(cb)  }
+    showHelp(cb)
+  }
 }
 
 function parseArg (arg, cb) {
@@ -38,7 +39,6 @@ function parseReport (path, format, cb) {
   fs.readFile(path, 'utf8', function cb_read_file (err, data) {
     if (err) {
       cb(err)
-      return
     }
     // Look for a success line
     var re = /^([\d]+) of ([\d]+) tests passed/im

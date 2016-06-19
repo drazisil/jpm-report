@@ -65,7 +65,7 @@ function parseReport (path, format, cb) {
 }
 
 function outputJUnit (input) {
-    res = JSON.parse(input)
+    var res = JSON.parse(input)
     if (res.success.total_success === res.success.total_tests) {
       var strOutput = ''
       strOutput += '<testsuite errors="0" failures="0" name="" tests="' + res.success.total_tests + '" time="223">'
@@ -80,7 +80,7 @@ function outputJUnit (input) {
 }
 
 function outputJUnit2File (input, filename) {
-    res = JSON.parse(input)
+    var res = JSON.parse(input)
     var strOutput = ''
     if (res.success.total_success === res.success.total_tests) {
       strOutput += '<testsuite errors="0" failures="0" name="" tests="' + res.success.total_tests + '" time="223">'

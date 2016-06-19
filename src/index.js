@@ -4,7 +4,6 @@ var fs = require('fs')
 var VERSION = require('../package.json').version
 
 function checkArgs (args, cb) {
-  console.dir(args)
   var argCount = args.length
   if (argCount < 3) {
     showHelp(cb)
@@ -78,7 +77,6 @@ function outputJUnit (input, cb) {
 function outputJUnit2File (input, filename, cb) {
     var res = JSON.parse(input)
     var strOutput = ''
-    console.dir(res)
     if (res.success.total_success === res.success.total_tests) {
       strOutput += '<testsuite errors="0" failures="0" name="" tests="' + res.success.total_tests + '" time="223">'
       strOutput += '<testcase classname="main"></testcase>'

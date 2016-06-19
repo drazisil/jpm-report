@@ -28,6 +28,7 @@ function parseArg (args, cb) {
         var stats = fs.statSync(args)
       }
     } catch (err) {
+      console.dir(err)
       if (err.code === 'ENOENT') {
         if (typeof args === Array) {
           cb('ERROR: ' + args[0] + ' is not a file.')

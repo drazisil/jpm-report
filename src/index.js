@@ -66,17 +66,13 @@ function parseReport (path, format, cb) {
 
 function outputJUnit (input, cb) {
     var res = JSON.parse(input)
-    if (res.success.total_success === res.success.total_tests) {
-      var strOutput = ''
-      strOutput += '<testsuite errors="0" failures="0" name="" tests="' + res.success.total_tests + '" time="223">'
-      strOutput += '<testcase classname="main"></testcase>'
-      strOutput += '</testsuite>'
-      process.stdout.write(strOutput)
-      cb(0)
-    } else {
-      process.stdout.write(res.success.total_success + ' of ' + res.success.total_tests + ' passed')
-      cb(1)
-    }
+    var total_failures = res.success.total_tests = res.success.total_success
+    var strOutput = ''
+    strOutput += '<testsuite errors="' + total_failures + '" failures="0" name="" tests="' + res.success.total_tests + '" time="223">'
+    strOutput += '<testcase classname="main"></testcase>'
+    strOutput += '</testsuite>'
+    process.stdout.write(strOutput)
+    cb(0)
 }
 
 function outputJUnit2File (input, filename, cb) {

@@ -167,7 +167,7 @@ describe('testing junit output: success', function () {
         assert.fail('should not have an error')
         done()
       } else {
-        fs.writeFileSync(res, 'test-data/error.json')
+        fs.writeFileSync('test-data/error.json', res)
         jpm_report.outputJUnit2File('test-data/error.json', 'test-data/error.xml')
         assert.ok('success')
         done()

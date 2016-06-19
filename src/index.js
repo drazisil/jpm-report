@@ -79,7 +79,7 @@ function outputJUnit (input, cb) {
     }
 }
 
-function outputJUnit2File (input, filename cb) {
+function outputJUnit2File (input, filename, cb) {
     var res = JSON.parse(input)
     var strOutput = ''
     if (res.success.total_success === res.success.total_tests) {

@@ -42,7 +42,6 @@ function parseReport (args, cb) {
       if (err) {
         cb(err)
       }
-      data = data.contents
       // Look for a success line
       var re = /^([\d]+) of ([\d]+) tests passed/im
       var found = data.match(re)

@@ -10,7 +10,7 @@ describe('Checking args', function () {
   it('with no args', function cb_parse_args_zero (done) {
     jpm_report.checkArgs(['node', 'jpm_report'], function cb_parse_args (err, res) {
       if (err) {
-        assert.equal('Please use --version', err)
+        assert.equal('jpm-report <input file> (output file)', err)
         done()
       }
     })

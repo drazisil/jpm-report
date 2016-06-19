@@ -48,7 +48,7 @@ describe('Checking args', function () {
   })
 
   it('with two args', function cb_parse_args_two (done) {
-    jpm_report.checkArgs(['node', 'jpm_report', test-data/success.txt', 'test-data/success.xml'], function cb_parse_args (err, res) {
+    jpm_report.checkArgs(['node', 'jpm_report', 'test-data/success.txt', 'test-data/success.xml'], function cb_parse_args (err, res) {
       if (err) {
         assert.equal('jpm-report <input file> (output file)', err)
         done()

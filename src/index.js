@@ -42,13 +42,14 @@ function parseReport (args, cb) {
       if (err) {
         cb(err)
       }
+      data = data.contents
       // Look for a success line
       var re = /^([\d]+) of ([\d]+) tests passed/im
       var found = data.match(re)
       if (found) {
         var res = JSON.stringify(
           {'success': {
-            'contents': data,
+            // 'contents': data,
             'total_tests': found[2],
             'total_success': found[1]}
           }

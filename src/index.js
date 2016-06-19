@@ -31,9 +31,9 @@ function parseArg (arg, cb) {
 
 function parseReport (path, format, cb) {
   // Check if a file
-  fs.stat(arg, function cb_stat (err, stats) {
+  fs.stat(path, function cb_stat (err, stats) {
     if (err || !stats.isFile()) {
-      cb('ERROR: ' + arg + ' is not a file.')
+      cb('ERROR: ' + path + ' is not a file.')
     }
   })
   fs.readFile(path, 'utf8', function cb_read_file (err, data) {

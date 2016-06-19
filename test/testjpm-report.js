@@ -154,9 +154,10 @@ describe('testing junit output: success', function () {
       } else {
         fs.writeFileSync('test-data/success.json', res)
         var inJSON = fs.readFileSync('test-data/success.json')
-        jpm_report.outputJUnit2File(inJSON, 'test-data/success.xml')
-        assert.ok('success')
-        done()
+        jpm_report.outputJUnit2File(inJSON, 'test-data/success.xml', function cbOutputJUnitFile(exitCode) {
+          assert.ok('success')
+          done()
+        })
       }
     })
   })
@@ -169,9 +170,10 @@ describe('testing junit output: success', function () {
       } else {
         fs.writeFileSync('test-data/error.json', res)
         var inJSON = fs.readFileSync('test-data/error.json')
-        jpm_report.outputJUnit2File(inJSON, 'test-data/error.xml')
-        assert.ok('success')
-        done()
+        jpm_report.outputJUnit2File(inJSON, 'test-data/error.xml', function cbOutputJUnitFile(exitCode) {
+          assert.ok('success')
+          done()
+        })
       }
     })
   })

@@ -8,7 +8,7 @@ jpmReport.checkArgs(process.argv, function cbParseArgs (err, res) {
     process.exit(1)
   } else {
     jpmReport.outputJUnit(res, function cbOutputJUnit(exitCode) {
-      exit(exitCode)
+      process.exit(exitCode)
     })
   }
 })

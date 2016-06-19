@@ -156,6 +156,7 @@ describe('testing junit output: success', function () {
         fs.writeFileSync(res, 'test-data/success.json')
         jpm_report.outputJUnit2File('test-data/success.json', 'test-data/success.xml')
         assert.ok('success')
+        done()
       }
     })
   })
@@ -169,6 +170,7 @@ describe('testing junit output: success', function () {
         fs.writeFileSync(res, 'test-data/error.json')
         jpm_report.outputJUnit2File('test-data/error.json', 'test-data/error.xml')
         assert.ok('success')
+        done()
       }
     })
   })

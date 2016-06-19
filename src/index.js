@@ -16,16 +16,16 @@ function checkArgs (args, cb) {
   }
 }
 
-function parseArg (arg, cb) {
-  if (arg[0] === '--version') {
+function parseArg (args, cb) {
+  if (args[0] === '--version') {
     cb(VERSION)
   } else {
     // Check if a file
-    fs.stat(arg, function cb_stat (err, stats) {
+    fs.stat(args[0], function cb_stat (err, stats) {
       if (err || !stats.isFile()) {
-        cb('ERROR: ' + arg + ' is not a file.')
+        cb('ERROR: ' + args[0] + ' is not a file.')
       } else {
-        parseReport(arg, 'json', cb)
+        parseReport(args, 'json', cb)
       }
     })
   }

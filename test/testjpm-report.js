@@ -50,7 +50,7 @@ describe('Checking args', function () {
   it('with more then one arg', function cb_parse_args_two (done) {
     jpm_report.checkArgs(['node', 'jpm_report', 'do', 'stuff'], function cb_parse_args (err, res) {
       if (err) {
-        assert.equal('ERROR: too many arguments, please use --help', err)
+        assert.equal('jpm-report <input file> (output file)', err)
         done()
       }
     })

@@ -149,7 +149,7 @@ describe('testing junit output: success', function () {
   it('test success', function (done) {
     jpm_report.parseReport('test-data/success.txt', 'json', function cb_parse_report (err, res) {
       if (err) {
-        assert.fail('should not have an error')
+        assert.equal('should not have an error', err)
         done()
       } else {
         fs.writeFileSync('test-data/success.json', res)
@@ -165,7 +165,7 @@ describe('testing junit output: success', function () {
     it('test fail', function (done) {
     jpm_report.parseReport('test-data/error.txt', 'json', function cb_parse_report (err, res) {
       if (err) {
-        assert.fail('should not have an error')
+        assert.equal('should not have an error', err)
         done()
       } else {
         fs.writeFileSync('test-data/error.json', res)

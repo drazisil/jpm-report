@@ -52,6 +52,9 @@ describe('Checking args', function () {
       if (err) {
         assert.equal('jpm-report <input file> (output file)', err)
         done()
+      } else {
+        assert.fail('should have an error')
+        done()
       }
     })
   })
@@ -65,6 +68,7 @@ describe('testing report processing, output: foo', function () {
         done()
       } else {
         assert.fail('should have an error')
+        done()
       }
     })
   })
@@ -78,6 +82,7 @@ describe('testing report processing, output: json', function () {
         done()
       } else {
         assert.fail('should have an error')
+        done()
       }
     })
   })
@@ -89,6 +94,7 @@ describe('testing report processing, output: json', function () {
         done()
       } else {
         assert.fail('should have an error')
+        done()
       }
     })
   })

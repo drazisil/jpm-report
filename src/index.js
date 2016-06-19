@@ -22,6 +22,7 @@ function parseArg (args, cb) {
   } else {
     // Check if a file
     try {
+      console.dir(args)
       if (typeof args === Array) {
         var stats = fs.statSync(args[0])
       } else {

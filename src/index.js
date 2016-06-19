@@ -23,11 +23,7 @@ function parseArg (args, cb) {
     // Check if a file
     try {
       console.dir(args)
-      if (typeof args === Array) {
-        var stats = fs.statSync(args[0])
-      } else {
-        var stats = fs.statSync(args)
-      }
+      var stats = fs.statSync(args[0])
     } catch (err) {
       console.dir(err)
       if (err.code === 'ENOENT') {

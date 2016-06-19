@@ -28,7 +28,7 @@ function parseArg (args, cb) {
         cb('ERROR: ' + args[0] + ' is not a file.')
       }
       console.dir(err)
-      cb(err)
+      cb(err.message)
     }
     parseReport(args, cb)
   }
@@ -44,7 +44,7 @@ function parseReport (args, cb) {
       cb('ERROR: ' + args[0] + ' is not a file.')
     }
     console.dir(err)
-    cb(err)
+    cb(err.message)
   }
   try {
     var data = fs.readFileSync(path, 'utf8')

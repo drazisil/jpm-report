@@ -40,7 +40,6 @@ describe('Checking args', function () {
         assert.equal(err, 'should not have an error')
         done()
       } else {
-        res = JSON.parse(res)
         assert.equal(res.success.total_success, res.success.total_tests)
         done()
       }
@@ -130,7 +129,6 @@ describe('testing report processing, output: json', function () {
         assert.equal(err, 'should not have an error')
         done()
       } else {
-        res = JSON.parse(res)
         assert.notEqual(res.success.total_success, res.success.total_tests)
         done()
       }
@@ -143,7 +141,6 @@ describe('testing report processing, output: json', function () {
         assert.equal(err, 'should not have an error')
         done()
       } else {
-        res = JSON.parse(res)
         assert.equal(res.success.total_success, res.success.total_tests)
         done()
       }
@@ -156,7 +153,6 @@ describe('testing report processing, output: json', function () {
         assert.equal(err, 'should not have an error')
         done()
       } else {
-        res = JSON.parse(res)
         assert.equal(res.success.total_success, res.success.total_tests)
         done()
       }

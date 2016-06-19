@@ -152,9 +152,9 @@ describe('testing junit output: success', function () {
         assert.fail('should not have an error')
         done()
       } else {
-        res = JSON.parse(res)
         fs.writeFileSync('test-data/success.json', res)
-        jpm_report.outputJUnit2File('test-data/success.json', 'test-data/success.xml')
+        var inJSON = fs.readFileSync('test-data/success.json')
+        jpm_report.outputJUnit2File(inJSON, 'test-data/success.xml')
         assert.ok('success')
         done()
       }
@@ -168,7 +168,8 @@ describe('testing junit output: success', function () {
         done()
       } else {
         fs.writeFileSync('test-data/error.json', res)
-        jpm_report.outputJUnit2File('test-data/error.json', 'test-data/error.xml')
+        var inJSON = fs.readFileSync('test-data/error.json')
+        jpm_report.outputJUnit2File(inJSON, 'test-data/error.xml')
         assert.ok('success')
         done()
       }

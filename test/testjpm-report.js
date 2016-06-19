@@ -40,6 +40,7 @@ describe('Checking args', function () {
         assert.equal(err, 'should not have an error')
         done()
       } else {
+        console.dir(res)
         assert.equal(res.success.total_success, res.success.total_tests)
         done()
       }

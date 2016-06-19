@@ -21,24 +21,32 @@ function parseArg (args, cb) {
     cb(VERSION)
   } else {
     // Check if a file
-    var stats = fs.statSync(args[0])
-    if (err || !stats.isFile()) {
-      cb('ERROR: ' + args[0] + ' is not a file.')
-    } else {
-      parseReport(args, cb)
+    try {
+      var stats = fs.statSync(args[0])
+      if (!stats.isFile()) {
+        cb('ERROR: ' + args[0] + ' is not a file.')
+      }      
+    } catch (err) {
+      cb(err)
     }
+    parseReport(args, cb)
   }
 }
 
 function parseReport (args, cb) {
   // Check if a file
   var path = args[0]
-  fs.statSync(path)
-  if (!stats.isFile()) {
-    cb('ERROR: ' + path + ' is not a file.')
+  try {
+    fs.statSync(path)
+    if (!stats.isFile()) {
+      cb('ERROR: ' + path + ' is not a file.')
+    }
+  } catch (err) {
+    cb(err)      
   }
-  fs.readFileSync(path, 'utf8')
-  if (err) {
+  try {
+    var data = fs.readFileSync(path, 'utf8')
+  } catch (err) {
     cb(err)
   }
   // Look for a success line

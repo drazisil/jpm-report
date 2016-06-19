@@ -17,6 +17,7 @@ function checkArgs (args, cb) {
 }
 
 function parseArg (args, cb) {
+  console.dir(args)
   if (args[0] === '--version') {
     cb(VERSION)
   } else {

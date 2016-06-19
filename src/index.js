@@ -58,11 +58,11 @@ function parseReport (args, cb) {
             cb(null, exitCode)
           })
         } else {
-          outputJUnit (res, function (err, exitCode){
+          outputJUnit (res, function (err, res){
             if (err) {
               cb(err)
             }
-            cb(null, exitCode)
+            cb(null, res)
           })
         }
       } else {
@@ -83,7 +83,7 @@ function outputJUnit (input, cb) {
   strOutput += '<testcase classname="main"></testcase>'
   strOutput += '</testsuite>'
   process.stdout.write(strOutput)
-  cb(null, 0)
+  cb(null, res)
 }
 
 function outputJUnit2File (input, filename, cb) {

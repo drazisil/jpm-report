@@ -86,13 +86,12 @@ function outputJUnit2File (input, filename) {
       strOutput += '<testsuite errors="0" failures="0" name="" tests="' + res.success.total_tests + '" time="223">'
       strOutput += '<testcase classname="main"></testcase>'
       strOutput += '</testsuite>'
-      console.error(' filename : ' + filename)
-      fs.writeFileSync(strOutput, filename)
+      fs.writeFileSync(filename, strOutput)
       process.stdout.write(strOutput)
       process.exit()
     } else {
       strOutput += res.success.total_success + ' of ' + res.success.total_tests + ' passed'
-      fs.writeFileSync(strOutput, filename)
+      fs.writeFileSync(filename, strOutput)
       process.stdout.write(strOutput)
       process.exit(1)
     }

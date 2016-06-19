@@ -64,7 +64,7 @@ function parseReport (path, format, cb) {
   })
 }
 
-function outputJUnit (input) {
+function outputJUnit (input, cb) {
     var res = JSON.parse(input)
     if (res.success.total_success === res.success.total_tests) {
       var strOutput = ''
@@ -72,14 +72,14 @@ function outputJUnit (input) {
       strOutput += '<testcase classname="main"></testcase>'
       strOutput += '</testsuite>'
       process.stdout.write(strOutput)
-      process.exit()
+      cb(0)
     } else {
       process.stdout.write(res.success.total_success + ' of ' + res.success.total_tests + ' passed')
-      process.exit(1)
+      cb(1)
     }
 }
 
-function outputJUnit2File (input, filename) {
+function outputJUnit2File (input, filename cb) {
     var res = JSON.parse(input)
     var strOutput = ''
     if (res.success.total_success === res.success.total_tests) {
@@ -88,12 +88,12 @@ function outputJUnit2File (input, filename) {
       strOutput += '</testsuite>'
       fs.writeFileSync(filename, strOutput)
       process.stdout.write(strOutput)
-      process.exit()
+      cb(0)
     } else {
       strOutput += res.success.total_success + ' of ' + res.success.total_tests + ' passed'
       fs.writeFileSync(filename, strOutput)
       process.stdout.write(strOutput)
-      process.exit(1)
+      cb(1)
     }
 }
 

@@ -7,15 +7,17 @@ function checkArgs (args, cb) {
   var argCount = args.length
   if (argCount < 3) {
     showHelp(cb)
-  } else if (argCount === 3 || argCount === 4) {
-    parseArg(args[2], cb)
+  } else if (argCount === 3) {
+    parseArg([args[2]], cb)
+  } else if (argCount === 4) {
+    parseArg([args[2], args[3]], cb)
   } else if (argCount > 4) {
     showHelp(cb)
   }
 }
 
 function parseArg (arg, cb) {
-  if (arg === '--version') {
+  if (arg[0] === '--version') {
     cb(VERSION)
   } else {
     // Check if a file
@@ -29,8 +31,9 @@ function parseArg (arg, cb) {
   }
 }
 
-function parseReport (path, format, cb) {
+function parseReport (args, format, cb) {
   // Check if a file
+  var path = args[0]
   fs.stat(path, function cb_stat (err, stats) {
     if (err || !stats.isFile()) {
       cb('ERROR: ' + path + ' is not a file.')
@@ -52,7 +55,15 @@ function parseReport (path, format, cb) {
             'total_success': found[1]}
           }
         )
-        cb(null, res)
+        if (args.length === 2) {
+          outputJUnit2File (res, args[1], function (exitCode){
+            cb(exitCode)
+          })
+        } else {
+          outputJUnit (res, function (exitCode){
+            cb(exitCode)
+          })
+        }
       } else {
         cb('ERROR: output format not supported, please see help')
       }

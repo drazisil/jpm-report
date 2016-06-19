@@ -66,12 +66,10 @@ function parseReport (args, cb) {
           })
         }
       } else {
-        cb('ERROR: output format not supported, please see help')
+        // No match, clearly an error
+        cb('ERROR: unable to locate result line')
       }
-    } else {
-      // No match, clearly an error
-      cb('ERROR: unable to locate result line')
-    }
+    })
   })
 }
 

@@ -153,7 +153,7 @@ describe('testing junit output: success', function () {
         done()
       } else {
         res = JSON.parse(res)
-        fs.writeFileSync(res, 'test-data/success.json')
+        fs.writeFileSync('test-data/success.json', res)
         jpm_report.outputJUnit2File('test-data/success.json', 'test-data/success.xml')
         assert.ok('success')
         done()

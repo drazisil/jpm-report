@@ -74,9 +74,7 @@ function parseReport (args, cb) {
 }
 
 function outputJUnit (input, cb) {
-  console.dir(input)
   var res = JSON.parse(input)
-  console.dir(res)
   var total_failures = res.success.total_tests = res.success.total_success
   var strOutput = ''
   strOutput += '<testsuite errors="0" failures="' + total_failures + '" name="" tests="' + res.success.total_tests + '" time="223">'

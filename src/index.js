@@ -17,7 +17,7 @@ function checkArgs (args, cb) {
 }
 
 function parseArg (args, cb) {
-  if (args[0] === '--version') {
+  if (args[0] == '--version') {
     cb(VERSION)
   } else {
     // Check if a file
@@ -26,8 +26,8 @@ function parseArg (args, cb) {
       var stats = fs.statSync(args[0])
     } catch (err) {
       console.dir(err)
-      if (err.code === 'ENOENT') {
-        if (typeof args === Array) {
+      if (err.code == 'ENOENT') {
+        if (typeof args == Array) {
           cb('ERROR: ' + args[0] + ' is not a file.')
         } else {
           cb('ERROR: ' + args + ' is not a file.')
@@ -49,7 +49,7 @@ function parseReport (args, cb) {
   try {
     fs.statSync(path)
   } catch (err) {
-    if (err.code === 'ENOENT') {
+    if (err.code == 'ENOENT') {
       cb('ERROR: ' + path + ' is not a file.')
     }
     cb(err)

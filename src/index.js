@@ -57,11 +57,14 @@ function parseReport (args, format, cb) {
         )
         if (args.length === 2) {
           outputJUnit2File (res, args[1], function (exitCode){
-            cb(exitCode)
+            cb(null, exitCode)
           })
         } else {
-          outputJUnit (res, function (exitCode){
-            cb(exitCode)
+          outputJUnit (res, function (err, exitCode){
+            if (err) {
+              cb(err)
+            }
+            cb(null, exitCode)
           })
         }
       } else {
@@ -82,7 +85,7 @@ function outputJUnit (input, cb) {
   strOutput += '<testcase classname="main"></testcase>'
   strOutput += '</testsuite>'
   process.stdout.write(strOutput)
-  cb(0)
+  cb(null, 0)
 }
 
 function outputJUnit2File (input, filename, cb) {
@@ -95,12 +98,12 @@ function outputJUnit2File (input, filename, cb) {
     strOutput += '</testsuite>'
     fs.writeFileSync(filename, strOutput)
     // process.stdout.write(strOutput)
-    cb(0)
+    cb(null, 0)
   } else {
     strOutput += res.success.total_success + ' of ' + res.success.total_tests + ' passed'
     fs.writeFileSync(filename, strOutput)
     // process.stdout.write(strOutput)
-    cb(1)
+    cb(null, 1)
   }
 }
 

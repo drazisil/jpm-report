@@ -21,7 +21,7 @@ function parseArg (args, cb) {
     cb(VERSION)
   } else {
     // Check if a file
-    fs.stat(args[0], function cb_stat (err, stats) {
+    fs.stat(args[0], function cb_stat (err, stats, cb) {
       if (err || !stats.isFile()) {
         cb('ERROR: ' + args[0] + ' is not a file.')
       } else {

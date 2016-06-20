@@ -78,50 +78,12 @@ function parseReport (args, cb) {
 }
 
 function outputJUnit (input, cb) {
-  var res = input
-  var total_failures = res.success.total_tests - res.success.total_success
-  var total_tests = res.success.total_tests
-  var output = ''
-  output += '<testsuite errors="0" failures="' + total_failures + '"' +
-    ' name="' + res.success.package_name + '"' +
-    ' timestamp="' + toISOStringJUnit(new Date()) + '"' +
-    ' tests="' + total_tests + '"' +
-    ' hostname="localhost"' +
-    ' time="223">\n'
-  output += '  <properties>\n<property name="generator" value="jpm-report" />\n</properties>\n'
-  var testcase = '  <testcase classname="main"' +
-  ' name="' + res.success.package_name + '"' +
-  ' time="223"></testcase>\n'
-  var system_out = '<system-out />\n'
-  var system_err = '<system-err />\n'
-  output += testcase
-  output += system_out
-  output += system_err
-  output += '</testsuite>'
+  var output = createJUnitXml(input)
   cb(null, output)
 }
 
 function outputJUnit2File (input, filename, cb) {
-  var res = input
-  var total_failures = res.success.total_tests - res.success.total_success
-  var total_tests = res.success.total_tests
-  var output = ''
-  output += '<testsuite errors="0" failures="' + total_failures + '"' +
-    ' name="' + res.success.package_name + '"' +
-    ' timestamp="' + toISOStringJUnit(new Date()) + '"' +
-    ' tests="' + total_tests + '"' +
-    ' hostname="localhost"' +
-    ' time="223">\n'
-  output += '  <properties>\n<property name="generator" value="jpm-report" />\n</properties>\n'
-  var testcase = '  <testcase classname="main"' +
-  ' name="' + res.success.package_name + '"' +
-  ' time="223"></testcase>\n'
-  var system_out = '<system-out />\n'
-  var system_err = '<system-err />\n'
-  output += testcase
-  output += system_out
-  output += system_err
-  output += '</testsuite>'
+  var output = createJUnitXml(input)
   fs.writeFileSync(filename, output)
   cb(null, 0)
 }
@@ -129,6 +91,31 @@ function outputJUnit2File (input, filename, cb) {
 function showHelp (cb) {
   var strHelp = 'jpm-report <input file> (output file)'
   cb(strHelp)
+}
+
+function createJUnitXml (input) {
+  var total_failures = input.success.total_tests - input.success.total_success
+  var total_tests = input.success.total_tests
+  var output = ''
+  output += '<testsuite errors="0" failures="' + total_failures + '"' +
+    ' name="' + input.success.package_name + '"' +
+    ' timestamp="' + toISOStringJUnit(new Date()) + '"' +
+    ' tests="' + total_tests + '"' +
+    ' hostname="localhost"' +
+    ' time="223">\n'
+  output += '  <properties>\n<property name="generator" value="jpm-report" />\n</properties>\n'
+  var testcase = '  <testcase classname="main"' +
+  ' name="' + input.success.package_name + '"' +
+  ' time="223"></testcase>\n'
+  var system_out = '<system-out />\n'
+  var system_err = '<system-err />\n'
+  for (var i = 0; i < total_tests; i++) {
+    output += testcase
+  }
+  output += system_out
+  output += system_err
+  output += '</testsuite>'
+  return output
 }
 
 function toISOStringJUnit (d) {

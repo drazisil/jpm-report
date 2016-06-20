@@ -40,8 +40,7 @@ describe('Checking args', function () {
         assert.equal(err, 'should not have an error')
         done()
       } else {
-        console.dir(res)
-        assert.equal(res.success.total_success, res.success.total_tests)
+        assert.equal(res[0], 'test-data/success.txt')
         done()
       }
     })
@@ -50,10 +49,11 @@ describe('Checking args', function () {
   it('with two args', function cb_parse_args_two (done) {
     jpm_report.checkArgs(['node', 'jpm_report', 'test-data/success.txt', 'test-data/success.xml'], function cb_parse_args (err, res) {
       if (err) {
-        assert.equal(err, 'jpm-report <input file> (output file)')
+        assert.equal(err, 'should not have an error')
         done()
       } else {
-        assert.fail('should have an error')
+        assert.equal(res[0], 'test-data/success.txt')
+        assert.equal(res[1], 'test-data/success.xml')
         done()
       }
     })
@@ -70,28 +70,13 @@ describe('Checking args', function () {
       }
     })
   })
-
 })
 
-describe('testing report processing, output: foo', function () {
-  it('test success', function (done) {
-    jpm_report.parseReport('test-data/success.txt', 'foo', function cb_parse_report (err, res) {
-      if (err) {
-        assert.equal(err, 'ERROR: output format not supported, please see help')
-        done()
-      } else {
-        assert.fail('should have an error')
-        done()
-      }
-    })
-  })
-})
-
-describe('testing report processing, output: json', function () {
+describe('testing report processing', function () {
   it('invalid file', function (done) {
     jpm_report.parseReport('test-data/FHFFY^fdhwhd', function cb_parse_report (err, res) {
       if (err) {
-        assert.equal(err, "Error: ENOENT, open 'test-data/FHFFY^fdhwhd'")
+        assert.equal(err, 'ERROR: test-data/FHFFY^fdhwhd is not a file.')
         done()
       } else {
         assert.fail('should have an error')
@@ -130,7 +115,7 @@ describe('testing report processing, output: json', function () {
         assert.equal(err, 'should not have an error')
         done()
       } else {
-        assert.notEqual(res.success.total_success, res.success.total_tests)
+        assert.notEqual(res, 'moo')
         done()
       }
     })
@@ -142,7 +127,7 @@ describe('testing report processing, output: json', function () {
         assert.equal(err, 'should not have an error')
         done()
       } else {
-        assert.equal(res.success.total_success, res.success.total_tests)
+        assert.equal(res.success.total_success, 15)
         done()
       }
     })
@@ -154,7 +139,7 @@ describe('testing report processing, output: json', function () {
         assert.equal(err, 'should not have an error')
         done()
       } else {
-        assert.equal(res.success.total_success, res.success.total_tests)
+        assert.equal(res.success.total_success, 15)
         done()
       }
     })
@@ -163,14 +148,14 @@ describe('testing report processing, output: json', function () {
 
 describe('testing junit output: success', function () {
   it('test success', function (done) {
-    jpm_report.parseReport('test-data/success.txt', function cb_parse_report (err, res) {
+    jpm_report.parseReport('test-data/success.txt', function cbParseReport (err, res) {
       if (err) {
         assert.equal(err, 'should not have an error')
         done()
       } else {
-        fs.writeFileSync('test-data/success.json', res)
-        var inJSON = fs.readFileSync('test-data/success.json')
-        jpm_report.outputJUnit2File(inJSON, 'test-data/success.xml', function cbOutputJUnitFile(exitCode) {
+        fs.writeFileSync('test-data/success.json', JSON.stringify(res))
+        var inJSON = JSON.parse(fs.readFileSync('test-data/success.json'))
+        jpm_report.outputJUnit2File(inJSON, 'test-data/success.xml', function cbOutputJUnitFile (exitCode) {
           assert.ok('success')
           done()
         })
@@ -178,15 +163,15 @@ describe('testing junit output: success', function () {
     })
   })
 
-    it('test fail', function (done) {
+  it('test fail', function (done) {
     jpm_report.parseReport('test-data/failure.txt', function cb_parse_report (err, res) {
       if (err) {
         assert.equal(err, 'should not have an error')
         done()
       } else {
-        fs.writeFileSync('test-data/failure.json', res)
-        var inJSON = fs.readFileSync('test-data/failure.json')
-        jpm_report.outputJUnit2File(inJSON, 'test-data/failure.xml', function cbOutputJUnitFile(exitCode) {
+        fs.writeFileSync('test-data/failure.json', JSON.stringify(res))
+        var inJSON = JSON.parse(fs.readFileSync('test-data/failure.json'))
+        jpm_report.outputJUnit2File(inJSON, 'test-data/failure.xml', function cbOutputJUnitFile (exitCode) {
           assert.ok('success')
           done()
         })

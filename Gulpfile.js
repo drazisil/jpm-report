@@ -37,18 +37,21 @@ gulp.task('coveralls', function (cb) {
 })
 
 gulp.task('validateXML', ['test'], function (cb) {
-  xsd.parseFile('./test-data/JUnit.xsd', function(err, schema){
-    schema.validateFile('./test-data/success.xml', function(err, validationErrors){
-      // err contains any technical error 
+  xsd.parseFile('./test-data/JUnit.xsd', function (err, schema) {
+    if (err) {
+      throw err
+    }
+    schema.validateFile('./test-data/success.xml', function (err, validationErrors) {
+      // err contains any technical error
       if (err) {
         throw err
       }
-      // validationError is an array, null if the validation is ok 
+      // validationError is an array, null if the validation is ok
       if (validationErrors) {
         console.dir(validationErrors)
-        exit(1)
+        process.exit(1)
       }
-    }); 
+    })
   })
 })
 

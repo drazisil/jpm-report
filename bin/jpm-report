@@ -7,8 +7,15 @@ jpmReport.checkArgs(process.argv, function cbParseArgs (err, res) {
     console.log(err)
     process.exit(1)
   } else {
-    jpmReport.outputJUnit(res, function cbOutputJUnit (exitCode) {
-      process.exit(exitCode)
+    var args = res
+    jpmReport.parseReport(args[0], function cbParseReport (err, res) {
+      if (err) {
+        throw err
+      } else {
+        jpmReport.outputJUnit2File(res, args[1], function cbOutputJUnitFile (exitCode) {
+          process.exit(exitCode)
+        })
+      }
     })
   }
 })

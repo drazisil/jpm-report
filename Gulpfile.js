@@ -5,6 +5,7 @@ var standard = require('gulp-standard')
 var mocha = require('gulp-mocha')
 var istanbul = require('gulp-istanbul')
 var coveralls = require('gulp-coveralls')
+var xsd = require('libxml-xsd')
 
 gulp.task('standard', function () {
   return gulp.src(['./bin/jpm-report'])
@@ -27,7 +28,6 @@ gulp.task('test', ['pre-test'], function (cb) {
     './test/**/*.js'
   ])
   .pipe(mocha({ reporter: 'spec' }))
-  // .pipe(jsc())
   .pipe(istanbul.writeReports()) // stores reports in "coverage" directory
 })
 
@@ -36,6 +36,25 @@ gulp.task('coveralls', function (cb) {
   .pipe(coveralls())
 })
 
-gulp.task('dev', ['standard', 'test', 'coveralls'])
+gulp.task('validateXML', ['test'], function (cb) {
+  xsd.parseFile('./test-data/JUnit.xsd', function (err, schema) {
+    if (err) {
+      throw err
+    }
+    schema.validateFile('./test-data/success.xml', function (err, validationErrors) {
+      // err contains any technical error
+      if (err) {
+        throw err
+      }
+      // validationError is an array, null if the validation is ok
+      if (validationErrors) {
+        console.dir(validationErrors)
+        process.exit(1)
+      }
+    })
+  })
+})
+
+gulp.task('dev', ['standard', 'test', 'coveralls', 'validateXML'])
 
 gulp.task('default', ['main'])

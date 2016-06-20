@@ -1,12 +1,11 @@
 {
   "name": "jpm-report",
-  "version": "1.0.2",
+  "version": "2.0.0",
   "description": "test reporter for mozilla's jpm addon test runner",
   "main": "./src/index.js",
   "bin": "./bin/jpm-report",
   "scripts": {
-    "test": "gulp test",
-    "coveralls": "gulp coveralls"
+    "test": "gulp dev"
   },
   "repository": {
     "type": "git",
@@ -23,14 +22,15 @@
   },
   "homepage": "https://github.com/drazisil/jpm-report#readme",
   "devDependencies": {
-    "coveralls": "^2.11.4",
-    "gulp": "^3.9.0",
+    "coveralls": "^2.11.9",
+    "gulp": "^3.9.1",
     "gulp-coveralls": "^0.1.4",
-    "gulp-istanbul": "^0.10.2",
-    "gulp-mocha": "^2.1.3",
-    "gulp-standard": "^5.2.2",
-    "istanbul": "^0.4.0",
-    "mocha": "^2.3.3",
-    "standard": "^5.3.1"
+    "gulp-istanbul": "^1.0.0",
+    "gulp-mocha": "^2.2.0",
+    "gulp-standard": "^7.0.1",
+    "istanbul": "^0.4.3",
+    "mocha": "^2.5.3",
+    "standard": "^7.1.2",
+    "libxml-xsd": "^0.5.2"
   }
 }

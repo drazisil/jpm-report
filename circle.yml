@@ -20,4 +20,3 @@ test:
     - mkdir $CIRCLE_TEST_REPORTS/junit
     - "bin/jpm-report test-data/success.txt $CIRCLE_TEST_REPORTS/junit/success.xml"
     - "bin/jpm-report test-data/failure.txt $CIRCLE_TEST_REPORTS/junit/failure.xml"
-    - "bin/jpm-report test-data/error.txt"

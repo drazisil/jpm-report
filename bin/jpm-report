@@ -12,9 +12,22 @@ jpmReport.checkArgs(process.argv, function cbParseArgs (err, res) {
       if (err) {
         throw err
       } else {
-        jpmReport.outputJUnit2File(res, args[1], function cbOutputJUnitFile (exitCode) {
-          process.exit(exitCode)
-        })
+        if (args.length === 2) {
+          jpmReport.outputJUnit2File(res, args[1], function cbOutputJUnitFile (err, exitCode) {
+            if (err) {
+              throw err
+            }
+            process.exit(exitCode)
+          })
+        } else {
+          jpmReport.outputJUnit(res, function cbOutputJUnit (err, output) {
+            if (err) {
+              throw err
+            }
+            console.log(output)
+            process.exit()
+          })
+        }
       }
     })
   }

@@ -58,15 +58,17 @@ function parseReport (args, cb) {
     }
   }
   // Look for a success line
-  var rePackageName = /^JPM \[info\] Starting jpm test on (.*)$/im
+  // var rePackageName = /^JPM \[info\] Starting jpm test on (.*)$/im
   var re = /^([\d]+) of ([\d]+) tests passed/im
-  var found1 = data.match(rePackageName)
+  // var found1 = data.match(rePackageName)
   var found2 = data.match(re)
-  if (found1 && found2) {
+  // if (found1 && found2) {
+  if (found2) {
     var res =
       {'success': {
         // 'contents': data,
-        'package_name': found1[1],
+        // 'package_name': found1[1],
+        'package_name': 'jpm',
         'total_tests': found2[2],
         'total_success': found2[1]}
       }

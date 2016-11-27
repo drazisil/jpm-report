@@ -121,8 +121,8 @@ function createJUnitXml (input) {
 }
 
 function toISOStringJUnit (d) {
-  return d.getFullYear() + '-' + (' 0' + d.getMonth()).slice(-2) + '-' +
-    ('0' + d.getDay()).slice(-2) + 'T' +
+  return d.getFullYear() + '-' + (' 0' + (d.getMonth()+1)).slice(-2) + '-' +
+    ('0' + d.getDate()).slice(-2) + 'T' +
     ('0' + d.getHours()).slice(-2) + ':' + ('0' + d.getMinutes()).slice(-2) + ':' +
     ('0' + d.getSeconds()).slice(-2)
 }

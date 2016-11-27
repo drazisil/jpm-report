@@ -28,7 +28,7 @@
     "gulp-istanbul": "^1.0.0",
     "gulp-mocha": "^3.0.1",
     "gulp-standard": "^7.0.1",
-    "istanbul": "^0.4.4",
+    "istanbul": "^0.4.5",
     "mocha": "^3.0.1",
     "standard": "^8.0.0",
     "libxml-xsd": "^0.5.2"

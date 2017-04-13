@@ -30,7 +30,7 @@
     "gulp-standard": "^8.0.3",
     "istanbul": "^0.4.5",
     "mocha": "^3.0.1",
-    "standard": "^9.0.2",
+    "standard": "^10.0.0",
     "libxml-xsd": "^0.5.2"
   }
 }
